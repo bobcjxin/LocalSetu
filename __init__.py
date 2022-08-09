@@ -240,9 +240,9 @@ async def verify_setu(bot, ev: CQEvent):
             await bot.send(ev, '您已经在审核模式中了哦~')
             return
         print(ev['prefix'])
-        if ev['prefix'] == '审核色图上传':
+        if ev['prefix'] == '审核se图上传':
             verifynum = 1
-        elif ev['prefix'] == '审核色图删除':
+        elif ev['prefix'] == '审核se图删除':
             verifynum = 2
         msg = await start_verify(bot,ev,int(ev["user_id"]), verifynum)
         await bot.send(ev, msg)
