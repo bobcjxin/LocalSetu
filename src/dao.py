@@ -83,7 +83,7 @@ class getImgDao:
         print(cursor.fetchall())
         print('='*25)
 
-        sql="SELECT id,url,anti_url,user,date,tag,pixiv_tag_t,pixiv_id,pixiv_url,verify FROM LocalSetu where man = ? AND verify = 0 ORDER BY random() limit 1"
+        sql="SELECT id,url,anti_url,user,date,tag,pixiv_tag_t,pixiv_id,pixiv_url,verify FROM LocalSetu where man = ? ORDER BY random() limit 1"
         cursor.execute(sql,(is_man,))
         conn.commit()
         # print(cursor.fetchone())
@@ -93,7 +93,7 @@ class getImgDao:
         """根据用户查找图片
         id,url,anti_url,user,date,tag,pixiv_tag_t,pixiv_id,pixiv_url,verify
         """
-        sql="SELECT id,url,anti_url,user,date,tag,pixiv_tag_t,pixiv_id,pixiv_url,verify from LocalSetu where man = ? AND user = ? AND verify = 0 ORDER BY random() limit 1"
+        sql="SELECT id,url,anti_url,user,date,tag,pixiv_tag_t,pixiv_id,pixiv_url,verify from LocalSetu where man = ? AND user = ? ORDER BY random() limit 1"
         cursor.execute(sql,(is_man,str(user)))
         conn.commit()
         return cursor.fetchone()
@@ -113,7 +113,7 @@ class getImgDao:
         id,url,anti_url,user,date,tag,pixiv_tag_t,pixiv_id,pixiv_url,verify
         """
         test_conn()
-        sql="SELECT id,url,anti_url,user,date,tag,pixiv_tag_t,pixiv_id,pixiv_url,verify FROM LocalSetu where man = ? AND (tag like ? OR pixiv_tag like ? OR pixiv_tag_t like ?) AND verify = 0 ORDER BY random() limit 1"
+        sql="SELECT id,url,anti_url,user,date,tag,pixiv_tag_t,pixiv_id,pixiv_url,verify FROM LocalSetu where man = ? AND (tag like ? OR pixiv_tag like ? OR pixiv_tag_t like ?) ORDER BY random() limit 1"
         cursor.execute(sql,(is_man,tag,tag,tag))
         conn.commit()
         return cursor.fetchone()

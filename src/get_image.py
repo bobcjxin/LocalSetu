@@ -29,10 +29,10 @@ async def get_local_image(search_tag, user, search_type=0, is_man= 0):
                 result = getImgDao().get_local_image_tag(is_man,search_tag)
         else:
             result = None
-        
+
         if not result:
            return '该群友xp不存在~~~',None,None
-       
+
         id = result[0]
         url=os.path.join(setu_folder,result[1])
         anti_url = os.path.join(setu_folder,result[2])
@@ -52,15 +52,16 @@ async def get_local_image(search_tag, user, search_type=0, is_man= 0):
             tag = f'自定义TAG:{str(tag)}'
         if pixiv_id :
             pixiv_url = "https://pixiv.net/i/"+ str(pixiv_id)
-            msg = f'涩图ID:{id} 来源[CQ:at,qq={str(user)}]'+ f'\n{str(tag)}'+f'\nPixivTAG:{pixiv_tag}' +f'\n{pixiv_url}' +f'\n支持ID、来源、TAG模糊查询哦~'
+            msg = f'涩图ID:{id} 来源[CQ:at,qq={str(user)}]'+f'\n{str(tag)}'+f'\n支持ID、来源、TAG模糊查询哦~'
             return msg,url,id
         else:
-            msg = f'涩图ID:{id} 来源[CQ:at,qq={str(user)}]'+ f'\n{str(tag)}'+f'\nPixivTAG:{pixiv_tag}' +f'\n支持ID、来源、TAG模糊查询哦~'
+            msg = f'涩图ID:{id} 来源[CQ:at,qq={str(user)}]'+f'\n{str(tag)}'+f'\n支持ID、来源、TAG模糊查询哦~'
             return msg,url,id
     except:
         logger.error(traceback.format_exc())
         return 'wuwuwu~出了点问题',None,None
-    
+
+
 async def get_original_image(id,bot,ev):
     try:
         results = getImgDao().get_original_image(id)

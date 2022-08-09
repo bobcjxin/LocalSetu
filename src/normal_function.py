@@ -26,9 +26,11 @@ async def redownload_from_tencent(id):
     except:
         logger.error(traceback.format_exc())
 
+
 async def update_tag(tag,id):
     normalDao().update_tag(tag,id)
-    
+
+
 async def anti_image(id):
     try:
         results = normalDao().get_anti_url(id)
