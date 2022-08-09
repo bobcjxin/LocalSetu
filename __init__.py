@@ -239,6 +239,7 @@ async def verify_setu(bot, ev: CQEvent):
         if VerifyImageProcess[user_id].state == True:
             await bot.send(ev, '您已经在审核模式中了哦~')
             return
+        print(ev['prefix'])
         if ev['prefix'] == '审核色图上传':
             verifynum = 1
         elif ev['prefix'] == '审核色图删除':
