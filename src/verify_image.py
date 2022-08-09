@@ -32,7 +32,8 @@ async def start_verify(bot,ev,user_id, verify_type ,state=True,sql_state=False,i
                 if results[4]:
                     man_text = '男图'
                 print('当前审核的图片为'+str(MessageSegment.image(f'file:///{os.path.abspath(os.path.join(setu_folder,results[0]))}'))+f'ID：{results[3]}\n来源为[CQ:at,qq={str(results[1])}]\n类型为:{man_text}\n上传时间:{results[2]}')
-                await bot.send(ev, '当前审核的图片为'+f'ID：{results[3]}\n来源为[CQ:at,qq={str(results[1])}]\n类型为:{man_text}\n上传时间:{results[2]}')
+                image =r'[CQ:image,file=file:///C:\Users\Administrator\Desktop\pcr\HoshinoBot\res\img\setu\10007.jpg]'
+                await bot.send(ev, '当前审核的图片为'+image+f'ID：{results[3]}\n来源为[CQ:at,qq={str(results[1])}]\n类型为:{man_text}\n上传时间:{results[2]}')
                 VerifyImageProcess[user_id] = VerifyImageProcess[user_id]._replace(sql_state = True)
 
             VerifyImageProcess[user_id] = VerifyImageProcess[user_id]._replace(time = VerifyImageProcess[user_id].time - 0.5)  
