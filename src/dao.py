@@ -86,7 +86,7 @@ class getImgDao:
         sql="SELECT id,url,anti_url,user,date,tag,pixiv_tag_t,pixiv_id,pixiv_url,verify FROM LocalSetu where man = ? AND verify = 0 ORDER BY random() limit 1"
         cursor.execute(sql,(is_man,))
         conn.commit()
-        print(cursor.fetchone())
+        # print(cursor.fetchone())
         return cursor.fetchone()
     
     def get_local_image_user(self, is_man,user):  
