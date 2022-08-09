@@ -246,6 +246,9 @@ async def verify_setu(bot, ev: CQEvent):
         elif ev['prefix'] == '审核se图删除':
             verifynum = 2
         msg = await start_verify(bot,ev,int(ev["user_id"]), verifynum)
+        print('='*25)
+        print(msg)
+        print('='*25)
         await bot.send(ev, msg)
     except:
         logger.error(traceback.format_exc())
