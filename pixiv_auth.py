@@ -12,8 +12,8 @@ from pprint import pprint
 from secrets import token_urlsafe
 from sys import exit
 from urllib.parse import urlencode
-from selenium import webdriver
-from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+# from selenium import webdriver
+# from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 
 # Latest app version can be found using GET /v1/application-info/android
@@ -62,11 +62,13 @@ def print_auth_token_response(response):
 
 
 def login():
-    caps = DesiredCapabilities.CHROME.copy()
-    caps["goog:loggingPrefs"] = {"performance": "ALL"}  # enable performance logs
+    try:
+        caps = DesiredCapabilities.CHROME.copy()
+        caps["goog:loggingPrefs"] = {"performance": "ALL"}  # enable performance logs
 
-    driver = webdriver.Chrome("./chromedriver", desired_capabilities=caps)
-
+        driver = webdriver.Chrome("./chromedriver", desired_capabilities=caps)
+    except:
+        return
     code_verifier, code_challenge = oauth_pkce(s256)
     login_params = {
         "code_challenge": code_challenge,
