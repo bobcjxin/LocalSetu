@@ -44,8 +44,8 @@ async def get_local_image(search_tag, user, search_type=0, is_man= 0):
         verify = result[9]
         if result[2]:
             url = anti_url
-        if verify:
-            return "该图正在等待审核，暂不支持查看~",None,None
+        # if verify:
+        #     return "该图正在等待审核，暂不支持查看~",None,None
         if not tag:
             tag = f'当前TAG为空，您可以发送修改TAG{id}进行编辑~'
         else:
