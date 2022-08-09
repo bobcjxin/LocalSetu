@@ -1,7 +1,7 @@
 from typing import List
 from PicImageSearch import SauceNAO,Network
 from PicImageSearch.model import SauceNAOResponse
-from pixivpy_async import *
+# from pixivpy_async import *
 from loguru import logger
 import re
 import traceback
@@ -29,7 +29,7 @@ async def get_pixiv_id(url):
         if sauceNAO_on:
             pixiv_id,index_name,sauceNAO_proxy = 0,'',None
             if sauceNAO_proxy_on:
-                sauceNAO_proxy = config['proxies']['proxy']                  
+                sauceNAO_proxy = config['proxies']['proxy']
             async with Network(proxies = sauceNAO_proxy) as client:
                 sauceNAO_token = config['sauceNAO']['token']
                 if isinstance(sauceNAO_token,list):
@@ -43,7 +43,7 @@ async def get_pixiv_id(url):
                 if res:
                     for raw in res.raw:
                         if raw.pixiv_id:
-                            pixiv_id = raw.pixiv_id     
+                            pixiv_id = raw.pixiv_id
                             index_name = raw.index_name
                             break
                     return pixiv_id,index_name
@@ -54,7 +54,7 @@ async def get_pixiv_id(url):
     except:
         logger.error(traceback.format_exc())
         return 0,''
-    
+
 #获取图片pixiv_tag和原图urla
 async def get_pixiv_tag_url(pixiv_id,page):
     """
@@ -125,8 +125,8 @@ async def verify(id,url):
         logger.error(traceback.format_exc())
         verify = verifyDao().update_verify_stats(id,1)
         return 1,None
-    
-    
+
+
 #从指定ID开始自动审核（获取TAG）
 async def auto_verify(id):
     try:
