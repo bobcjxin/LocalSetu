@@ -17,21 +17,27 @@ VerifyImageProcess = defaultdict(lambda: VerifyImageState(False, False, 1, None,
 async def start_verify(bot,ev,user_id, verify_type ,state=True,sql_state=False,image_info=None,time=20):
     try:
         VerifyImageProcess[user_id] = VerifyImageState(state, sql_state, verify_type,image_info, time)
+        print(VerifyImageProcess)
+        print(VerifyImageProcess[user_id].time)
+        print(VerifyImageProcess[user_id].state)
         while VerifyImageProcess[user_id].time > 0 and VerifyImageProcess[user_id].state:
             if not VerifyImageProcess[user_id].sql_state:                      #没有待审核图则重新拿一张并发送
                 results = verifyDao().get_verify_info(verify_type)
                 if not results:
+                    print('not results')
                     await quit_verify(user_id)
                     return '好耶，当前没有要审核的图~已退出审核模式'
                 VerifyImageProcess[user_id] = VerifyImageProcess[user_id]._replace(image_info = results)
                 man_text = '色图'
                 if results[4]:
                     man_text = '男图'
+                print('当前审核图片为')
                 await bot.send(ev, '当前审核的图片为'+str(MessageSegment.image(f'file:///{os.path.abspath(os.path.join(setu_folder,results[0]))}'))+f'ID：{results[3]}\n来源为[CQ:at,qq={str(results[1])}]\n类型为:{man_text}\n上传时间:{results[2]}')
                 VerifyImageProcess[user_id] = VerifyImageProcess[user_id]._replace(sql_state = True)
 
             VerifyImageProcess[user_id] = VerifyImageProcess[user_id]._replace(time = VerifyImageProcess[user_id].time - 0.5)  
             await asyncio.sleep(0.5)
+        print('quit_verify')
         return await quit_verify(user_id)
     except:
         logger.error(traceback.format_exc())
