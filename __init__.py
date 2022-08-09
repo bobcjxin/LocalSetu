@@ -121,12 +121,14 @@ async def send_local_setu(bot, ev):
 
 @sv.on_prefix('上传se图')
 async def start_load_image(bot, ev: CQEvent):
+    print('要来了')
+    print('ev')
     try:
         is_man = 0
         if ev['prefix'] == '上传男图': 
             is_man = 1
         if not str(ev.message).strip():
-            user_id=ev['user_id']
+            user_id = ev['user_id']
             if LoadImageProcess[user_id].state:
                 await bot.send(ev, '您已经在上传模式中了哦~')
                 return
@@ -135,7 +137,7 @@ async def start_load_image(bot, ev: CQEvent):
                 group_id = None
                 is_private = True
             else:
-                group_id=ev['group_id']
+                group_id = ev['group_id']
                 is_private = False
             msg = await start_load(group_id=group_id,is_private=is_private,user_id=user_id,is_man=is_man)
             await bot.send(ev, msg)
@@ -239,7 +241,6 @@ async def verify_setu(bot, ev: CQEvent):
         if VerifyImageProcess[user_id].state == True:
             await bot.send(ev, '您已经在审核模式中了哦~')
             return
-        print(ev['prefix'])
         if ev['prefix'] == '审核se图上传':
             verifynum = 1
         elif ev['prefix'] == '审核se图删除':
